@@ -11,8 +11,8 @@
     <!-- Bootstrap core CSS -->
     <link href="{{ url('/') }}/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Font  -->
-    <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800|Roboto:300,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
-    <!-- Icofont CSS -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800|Roboto:300,400,400i,500,500i,700,700i,900,900i" rel="stylesheet"> -->
+
     <link rel="stylesheet" href="{{ url('/') }}/assets/css/icofont.min.css">
     <!-- Meanmenu CSS -->
     <link rel="stylesheet" href="{{ url('/') }}/assets/css/meanmenu.min.css">
@@ -25,7 +25,7 @@
     <!-- Responsive  CSS -->
     <link rel="stylesheet" href="{{ url('/') }}/assets/css/responsive.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url('/') }}/assets/css/font-awesome.min.css">
     <style>
         .main-footer {
             background-color: #0E70C7;
@@ -139,8 +139,8 @@
     </section>
 
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url('/') }}/assets/js/jquery.min.js"></script>
+    <script src="{{ url('/') }}/assets/js/bootstrap.bundle.min.js"></script>
 
     <script src="{{ url('/') }}/assets/js/sha512.js"></script>
 

@@ -40,7 +40,7 @@ class LoginController extends Controller {
                     if($user->role_id == 1 || $user->role_id == 2){
 
                         $otp = 1234;
-                        $otpObj = new OTPModel(["mobile" => $user->mobile_num, "otp" => $otp, "create_ip" => $request->ip()]);
+                        $otpObj = new OTPModel(["mobile" => $user->mobile_num, "otp" => $otp, "ip_address" => $request->ip()]);
                         $otpObj->save();
 
                         $smsController = new SmsController();
