@@ -19,6 +19,10 @@ class AdminMiddleware
 
             return $next($request);
          }
+         if($request->session()->get('role_id')===2){
+
+            return $next($request);
+        }
          return redirect('/login');
     }
 }

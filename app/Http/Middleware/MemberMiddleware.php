@@ -15,6 +15,7 @@ class MemberMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        //not using member middleware
         if($request->session()->get('role_id')===2){
 
             return $next($request);

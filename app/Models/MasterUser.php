@@ -17,6 +17,7 @@ class MasterUser extends Model
         'email',
         'mobile_num',
         'password',
+        'salt',
         'role_id'
     ];
 }

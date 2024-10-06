@@ -61,11 +61,11 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth.user', 'role.data', '
     // Route::get('/room-list', [AdminController::class, 'getRoomList'])->name('room-list');
 });
 
-// Route::group(['prefix' => '/member', 'middleware' => ['auth.user', 'role.data', 'member']], function() {
-    
-//     Route::get('/otpVerification', [LoginController::class, 'otpVerification'])->name('otpVerification');
-//     Route::post('/verify-otp', [LoginController::class, 'verifyOtp'])->name('verify.otp');
-//     Route::get('/dashboard', [MemberController::class, 'dashboard'])->name('dashboard');
-// });
+//member route start
+
+Route::group(['prefix' => '/member', 'middleware' => ['auth.user', 'role.data', 'admin']], function() {
+    Route::get('/member-dashboard', [MemberController::class, 'member_dashboard'])->name('member-dashboard');
+});
+//member route end
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
