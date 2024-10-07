@@ -26,71 +26,10 @@
     <link rel="stylesheet" href="{{ url('/') }}/adminassets/css/semi-dark.css" />
     <link rel="stylesheet" href="{{ url('/') }}/adminassets/css/header-colors.css" />
     <!-- CSS -->
-    <link rel="stylesheet" href="{{ url('/') }}/assets/css/style.css">
+    <!-- <link rel="stylesheet" href="{{ url('/') }}/assets/css/style.css"> -->
     {{-- <link rel="stylesheet" href="{{ url('/') }}/assets/css/responsive.css"> --}}
-    <style>
-        .container {
-            margin: auto;
-            width: 90%;
-        }
-        .order-2 {
-            box-shadow: 0px 0px 10px lightgray;
-            padding: 20px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        .section-title {
-            margin-bottom: 2em;
-        }
-        .form-row {
-          margin-bottom: 20px;
-        }
-        .entryarea {
-          position: relative;
-          height: 50px;
-          line-height: 50px;
-        }
-        input, textarea {
-          position: absolute;
-          width: 100%;
-          outline: none;
-          /* font-size: 2em; */
-          padding: 0 20px;
-          line-height: 50px;
-          transition: 0.1s ease;
-          background: transparent;
-          border: 1px solid gray;
-          border-radius: 5px;
-          z-index: 1111;
-        }
-        .labelline {
-          position: absolute;
-          /* font-size: 1.2em; */
-          padding: 0 10px;
-          margin: 0 15px;
-          transition: 0.2s ease;
-          background: #fff;
-        }
-        input[type="text"]:focus,
-        input[type="text"]:valid, textarea:focus, textarea:valid {
-          color: black;
-          border: 1px solid green;
-        }
-        input[type="text"]:focus + .labelline,
-        input[type="text"]:valid + .labelline,
-        textarea:focus + .labelline, textarea:valid + .labelline {
-          color: green;
-          height: 30px;
-          /* line-height: 30px; */
-          transform: translate(-15px, -16px) scale(0.88);
-          z-index: 1111;
-        }
-        .close {
-            border: none;
-            float: right;
-            background: transparent;
-        }
-    </style>
+   
+       
 
 </head>
 
@@ -99,73 +38,118 @@
         @include ('admin.include.index-header2');
         <div class="page-wrapper">
             <div class="page-content">
-                <section id="contact" class="contact-area after-none contact-bg pt-20 pb-20 p-relative fix">
-                    <div class="container">
-                        <div class="row justify-content-center align-items-center">
-                            <div class="col-lg-12 order-2">
-                                <div class="add-member-form">
-                                    @if(session('success'))
-                                        <div class="alert alert-success alert-dismissible">
-                                            <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true">×</button>
-                                            {{ session('success') }}
-                                        </div>
-                                    @endif
-                                    {{-- <div class="alert alert-warning alert-dismissible">
-                                        <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true">×</button>
-                                        <h5><i class="icon fa fa-exclamation-triangle"></i> Alert!</h5>
-                                        {{ session('info') }}
-                                    </div> --}}
-                                    <div class="section-title center-align mb-40 text-center wow fadeInDown animated"
-                                        data-animation=fadeInDown data-delay=.4s>
-                                        <h4>
-                                            Add Member
-                                        </h4>
-                                    </div>
-                                    <form action="/admin/store-member" method="POST" class="member-form mt-30" enctype="multipart/form-data">
+                <!--breadcrumb-->
+				<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+					<div class="breadcrumb-title pe-3">Member</div>
+					<div class="ps-3">
+						<nav aria-label="breadcrumb">
+							<ol class="breadcrumb mb-0 p-0">
+								<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+								</li>
+								<li class="breadcrumb-item active" aria-current="page">Add New Member</li>
+							</ol>
+						</nav>
+					</div>
+					<!-- <div class="ms-auto">
+						<div class="btn-group">
+							<button type="button" class="btn btn-primary">Settings</button>
+							<button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">	<span class="visually-hidden">Toggle Dropdown</span>
+							</button>
+							<div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">	<a class="dropdown-item" href="javascript:;">Action</a>
+								<a class="dropdown-item" href="javascript:;">Another action</a>
+								<a class="dropdown-item" href="javascript:;">Something else here</a>
+								<div class="dropdown-divider"></div>	<a class="dropdown-item" href="javascript:;">Separated link</a>
+							</div>
+						</div>
+					</div> -->
+				</div>
+				<!--end breadcrumb-->
+                <div class="card">
+						  <div class="card-body p-4">
+							  <!-- <h5 class="card-title">Add New Product</h5>
+							  <hr/> -->
+							   <div class="form-body mt-4">
+								<div class="row">
+								   <div class="col-lg-12">
+								   <div class="border border-3 p-4 rounded">
+                                   <form autocomplete="off" enctype="multipart/form-data" id="submitForm" action="" method="POST">
+                                        
                                         @csrf
-                                        <div class="row form-row">
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="entryarea">
-                                                    <input type="text" required name="member_name">
-                                                    <div class="labelline">Member Name</div>
-                                                </div>
+                                        <div class="card-body">
+                                            @if (session('success'))
+                                            <div class="alert alert-success alert-dismissible">
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                <h5><i class="icon fas fa-check"></i> Success!</h5>
+                                                {{ session('success') }}
                                             </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="entryarea">
-                                                    <input type="text" required name="mobile_num">
-                                                    <div class="labelline">Contact No.</div>
-                                                </div>
+                                            @endif
+                                            @if (session('info'))
+                                            <div class="alert alert-danger alert-dismissible">
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                <h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
+                                                {{ session('info') }}
                                             </div>
+                                            @endif
+                                            <div class="row">
+
+                                                <div class="form-group col-md-4">
+                                                    <label>First Name</label>
+                                                    <input type="text" class="form-control text-left" placeholder="Enter Member First Name"
+                                                        id="first_name" name="first_name">
+                                                    <small class="text-danger">{{ $errors->first('first_name') }}</small>
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label>Last Name</label>
+                                                    <input type="text" class="form-control text-left" placeholder="Enter Member Last Name"
+                                                        id="last_name" name="last_name">
+                                                    <small class="text-danger">{{ $errors->first('last_name') }}</small>
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label for="mobile">Mobile Number</label>
+                                                    <input type="text" class="form-control" placeholder="Contact Number" id="mobile"
+                                                        name="mobile" maxlength="10">
+                                                    <small class="text-danger">{{ $errors->first('mobile') }}</small>
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label for="email">Email ID</label>
+                                                    <input type="text" class="form-control" placeholder="Email ID" id="email" name="email">
+                                                    <small class="text-danger">{{ $errors->first('email') }}</small>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="form-group col-md-12">
+                                                    <label for="address">Address</label>
+                                                    <input type="text" class="form-control" placeholder="Enter Address" id="address"
+                                                        name="address">
+                                                    <small class="text-danger">{{ $errors->first('address') }}</small>
+                                                </div>
+
+                                            </div>
+                                                <div class="col-6">
+                                                <button type="submit" class="btn btn-primary" value="submit"
+                                                    name="btnSubmit">Submit</button>
+                                                <button type="reset" class="btn btn-danger">Cancel</button>
+                                                </div>
                                         </div>
-                                        <div class="row form-row">
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="entryarea">
-                                                    <input type="text" required name="member_email_id">
-                                                    <div class="labelline">Email ID</div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="entryarea">
-                                                    <textarea name="member_address" required></textarea>
-                                                    <div class="labelline">Address</div>
-                                                </div>
-                                            </div>
-                                        </div>  <br>  
-                                            <div class="col-lg-12">
-                                                <div class="slider-btn">
-                                                    <button class="btn ss-btn" data-animation="fadeInRight"
-                                                        data-delay=.8s><span>Submit</span></button>
-                                                </div>
-                                            </div>
                                     </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+									</div>
+								   </div>
+								   
+							  </div> 
+						  </div>
+						  </div>
+					   </div><!--end row-->
+					</div>
+				  </div>
+			  </div>
             </div>
         </div>
-        @include ('admin.include.color-switcher');
+        <!-- @include ('admin.include.color-switcher'); -->
     </div>
 
     <!-- Bootstrap JS -->

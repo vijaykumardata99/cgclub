@@ -42,8 +42,9 @@ class LoginController extends Controller {
             $salt = $userData->salt;
             $salt_password = $password . $salt;
             $hased_password = hash('SHA512', $salt_password);
+            //dd($hased_password);die;
             $user = MasterUser::select(
-                'id', 'username', 'password', 'role_id', 'mobile_num','salt'
+                'id', 'username', 'password', 'role_id', 'mobile','salt'
             )
                 ->where('username', $username)->where('password', $hased_password)->where('salt', $salt)
                 ->get()
@@ -55,7 +56,7 @@ class LoginController extends Controller {
                     if($user->role_id == 1 || $user->role_id == 2){
                         
                         $otp = 1234;
-                        $otpObj = new OTPModel(["mobile" => $user->mobile_num, "otp" => $otp, "ip_address" => $request->ip()]);
+                        $otpObj = new OTPModel(["mobile" => $user->mobile, "otp" => $otp, "ip_address" => $request->ip()]);
                         $otpObj->save();
                         $smsController = new SmsController();
                         $mobile = $otpObj->mobile;

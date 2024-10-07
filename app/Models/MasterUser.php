@@ -15,7 +15,7 @@ class MasterUser extends Model
         'last_name',
         'username',
         'email',
-        'mobile_num',
+        'mobile',
         'password',
         'salt',
         'role_id'

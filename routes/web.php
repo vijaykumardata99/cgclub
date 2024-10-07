@@ -48,8 +48,8 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth.user', 'role.data', '
     Route::post('/verify-otp', [LoginController::class, 'verifyOtp'])->name('verify.otp');
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
-    Route::get('/add-member', [AdminController::class, 'addMember'])->name('add-member');
-    Route::post('/store-member', [AdminController::class, 'storeMember'])->name('store-member');
+    // Route::get('/add-member', [AdminController::class, 'addMember'])->name('add-member');
+    // Route::post('/store-member', [AdminController::class, 'storeMember'])->name('store-member');
     Route::get('/member-list', [AdminController::class, 'getMemberList'])->name('member-list');
 
     Route::get('/add-coach', [AdminController::class, 'addCoach'])->name('add-coach');
@@ -66,6 +66,12 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth.user', 'role.data', '
 Route::group(['prefix' => '/member', 'middleware' => ['auth.user', 'role.data', 'admin']], function() {
     Route::get('/member-dashboard', [MemberController::class, 'member_dashboard'])->name('member-dashboard');
 });
+
+Route::group(['prefix' => 'admin'], function () {
+    route::get('/memberdetails', [AdminController::class, 'member_details'])->name('admin.memberdetails');
+    route::post('/memberdetails', [AdminController::class, 'member_details_insert'])->name('admin.memberdetailsinsert');
+});
+
 //member route end
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

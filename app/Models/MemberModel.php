@@ -8,6 +8,6 @@ class MemberModel extends Model {
     protected $table = 'tbl_members';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'member_name', 'mobile_num', 'member_email_id', 'member_address'
+        'first_name','last_name', 'mobile', 'email', 'address'
     ];
 }

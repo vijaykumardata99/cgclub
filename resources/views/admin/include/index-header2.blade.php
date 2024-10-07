@@ -33,7 +33,7 @@
 			</a>
 			<ul>
 				<li>
-					<a href="{{ url('/admin/add-member')}}"><i class="bx bx-right-arrow-alt"></i>Add Member</a>
+					<a href="{{ url('/admin/memberdetails')}}"><i class="bx bx-right-arrow-alt"></i>Add Member</a>
 					<li>
 						<a href="{{ url('/admin/member-list')}}"><i class="bx bx-right-arrow-alt"></i>Member List</a>
 					</li>
