@@ -50,7 +50,7 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth.user', 'role.data', '
 
     // Route::get('/add-member', [AdminController::class, 'addMember'])->name('add-member');
     // Route::post('/store-member', [AdminController::class, 'storeMember'])->name('store-member');
-    Route::get('/member-list', [AdminController::class, 'getMemberList'])->name('member-list');
+    //Route::get('/member-list', [AdminController::class, 'getMemberList'])->name('member-list');
 
     Route::get('/add-coach', [AdminController::class, 'addCoach'])->name('add-coach');
     Route::post('/store-coach', [AdminController::class, 'storeCoach'])->name('store-coach');
@@ -70,8 +70,21 @@ Route::group(['prefix' => '/member', 'middleware' => ['auth.user', 'role.data', 
 Route::group(['prefix' => 'admin'], function () {
     route::get('/memberdetails', [AdminController::class, 'member_details'])->name('admin.memberdetails');
     route::post('/memberdetails', [AdminController::class, 'member_details_insert'])->name('admin.memberdetailsinsert');
+   }
+);
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/memberlist', [AdminController::class, 'getMemberList'])->name('admin.member-list');    
+
 });
 
 //member route end
+
+//coach routes start
+Route::group(['prefix' => 'admin'], function () {
+    route::get('/coachdetails', [AdminController::class, 'coach_details'])->name('admin.coachdetails');
+    route::post('/coachdetails', [AdminController::class, 'coach_details_insert'])->name('admin.coachdetailsinsert');
+   }
+);
+//coach route end
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

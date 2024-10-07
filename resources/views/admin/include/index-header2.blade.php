@@ -35,7 +35,7 @@
 				<li>
 					<a href="{{ url('/admin/memberdetails')}}"><i class="bx bx-right-arrow-alt"></i>Add Member</a>
 					<li>
-						<a href="{{ url('/admin/member-list')}}"><i class="bx bx-right-arrow-alt"></i>Member List</a>
+						<a href="{{ url('/admin/memberlist')}}"><i class="bx bx-right-arrow-alt"></i>Member List</a>
 					</li>
 				</li>
 				
@@ -48,7 +48,7 @@
 				<div class="menu-title">Coach</div>
 			</a>
 			<ul>
-				<li> <a href="{{ url('/admin/add-coach')}}"><i class="bx bx-right-arrow-alt"></i>Add Coach</a>
+				<li> <a href="{{ url('/admin/coachdetails')}}"><i class="bx bx-right-arrow-alt"></i>Add Coach</a>
 				</li>
 				<li> <a href="{{ url('/admin/coach-list')}}"><i class="bx bx-right-arrow-alt"></i>Coach List</a>
 				</li>

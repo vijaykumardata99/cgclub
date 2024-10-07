@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CoachRequest;
 use App\Models\CoachModel;
 use App\Models\MasterUser;
 use App\Models\MemberModel;
@@ -23,73 +24,11 @@ class AdminController extends Controller {
     public function dashboard() {
         $role_id = session('role_id');
         $roleData = $role_id ? MasterUser::find($role_id) : null;
-        return view('admin.index', compact('roleData'));
+        $membercount = MemberModel::selectRaw('IFNULL(COUNT(id), 0) as membercount')->first()->membercount;
+        $coachcount = CoachModel::selectRaw('IFNULL(COUNT(id), 0) as coachcount')->first()->coachcount;
+        return view('admin.index', compact('roleData','membercount','coachcount'));
     }
-
-    public function addMember() {
-        $role_id = session('role_id');
-        $roleData = $role_id ? MasterUser::find($role_id) : null;
-        $memberData = MemberModel::all();
-        return view('admin.add-member', compact('memberData', 'roleData'));
-    }
-
-    public function storeMember(Request $request) {
-        $role_id = session('role_id');
-        $roleData = $role_id ? MasterUser::find($role_id) : null;
-
-        $request->validate([
-            'member_name'=>'required',
-            'mobile_num'=>'required',
-            'member_email_id'=>'required',
-            'member_address'=>'required'
-        ]);
-        $member = new MemberModel();
-        $member->member_name = $request->member_name;
-        $member->mobile_num = $request->mobile_num;
-        $member->member_email_id = $request->member_email_id;
-        $member->member_address = $request->member_address;
-        $member->save();
-        return redirect()->route('member-list', compact('roleData'))->with('success', 'Member added successfully.');
-    }
-    public function getMemberList() {
-        $role_id = session('role_id');
-        $roleData = $role_id ? MasterUser::find($role_id) : null;
-        $memberList = MemberModel::all();
-        return view('admin.member-list', compact('roleData', 'memberList'));
-    }
-    public function addCoach() {
-        $role_id = session('role_id');
-        $roleData = $role_id ? MasterUser::find($role_id) : null;
-        $coachData = CoachModel::all();
-        return view('admin.add-coach', compact('coachData', 'roleData'));
-    }
-
-    public function storeCoach(Request $request) {
-        $role_id = session('role_id');
-        $roleData = $role_id ? MasterUser::find($role_id) : null;
-
-        $request->validate([
-            'coach_name'=>'required',
-            'coach_num'=>'required',
-            'sports_name'=>'required',
-            'designation'=>'required'
-        ]);
-        $member = new CoachModel();
-        $member->coach_name = $request->coach_name;
-        $member->coach_num = $request->coach_num;
-        $member->sports_name = $request->sports_name;
-        $member->designation = $request->designation;
-        $member->save();
-        return redirect()->route('coach-list', compact('roleData'))->with('success', 'Coach added successfully.');
-    }
-    public function getCoachList() {
-        $role_id = session('role_id');
-        $roleData = $role_id ? MasterUser::find($role_id) : null;
-        $coachList = CoachModel::all();
-        return view('admin.coach-list', compact('roleData', 'coachList'));
-    }
-
-
+    
     //add member with login id and password
     function crypto_rand_secure($min, $max)
     {
@@ -207,5 +146,72 @@ class AdminController extends Controller {
                 DB::rollBack();
             }
         }
+    }
+    //member list show start
+    public function getMemberList() {
+        $role_id = session('role_id');
+        $roleData = $role_id ? MasterUser::find($role_id) : null;
+        $members = MemberModel::select(
+            'id',
+            'first_name',
+            'last_name',
+            'mobile',
+            'email',
+            'address'
+        ) ->get();
+
+        // $members = DB::select(DB::raw("
+        // SELECT id,first_name,last_name,mobile,email,address FROM tbl_members"));
+
+        return view('admin/member-list', compact('members','roleData'));
+    
+    }
+    //member list show end
+
+    //add coach start
+    public function coach_details() {
+        $role_id = session('role_id');
+        $roleData = $role_id ? MasterUser::find($role_id) : null;
+        return view('admin.aad-coach', compact('roleData'));
+    }
+
+    public function coach_details_insert(CoachRequest $request)
+    {
+        //dd($request->all());
+        $request->validated();
+        $input = $request->except('_token');
+        $button_submit = trim($request->input('btnSubmit'));
+        if ($button_submit == 'submit' && $request->method() == 'POST') {
+            DB::beginTransaction();
+            try {
+                $coach=new CoachModel();
+                $coach->coach_name = $request->coach_name;
+                $coach->coach_num = $request->coach_num;
+                $coach->sports_name = $request->sports_name;
+                $coach->designation = $request->designation;
+                $coach->ip_address = $request->ip();
+                $coach->create_by = $request->session()->get('role_id');
+                $coach->save();
+                DB::commit();
+                if ($request->session()->get('role_id') == 1) {
+                    return redirect()->route("admin.coachdetails")->with('success', 'Coach Details Saved successfully.');
+               
+                } else {
+                    return redirect()->route("admin.coachdetails")->with('info', 'Some Error !!! Please Try Again');
+               
+                }
+            } catch (\Throwable $th) {
+                return redirect()->back()->withInput()->with('info', 'Internal Server Error - ' . $th);
+                DB::rollBack();
+            }
+        }
+    }
+    //add coach end
+
+    public function getCoachList() {
+        $role_id = session('role_id');
+        $roleData = $role_id ? MasterUser::find($role_id) : null;
+        $coachList = CoachModel::all();
+        return view('admin.coach-list', compact('roleData', 'coachList'));
     }
 }

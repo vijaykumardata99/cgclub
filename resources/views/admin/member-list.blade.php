@@ -56,6 +56,20 @@
         @include ('admin.include.index-header2');
         <div class="page-wrapper">
             <div class="page-content">
+                <!--breadcrumb-->
+				<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+					<div class="breadcrumb-title pe-3">Member</div>
+					<div class="ps-3">
+						<nav aria-label="breadcrumb">
+							<ol class="breadcrumb mb-0 p-0">
+								<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+								</li>
+								<li class="breadcrumb-item active" aria-current="page">Member List</li>
+							</ol>
+						</nav>
+					</div>
+				</div>
+				<!--end breadcrumb-->
                 <section id="contact" class="contact-area after-none contact-bg pt-20 pb-20 p-relative fix">
                     <div class="container">
                         <div class="row justify-content-center align-items-center">
@@ -86,14 +100,14 @@
                                         </thead>
                                         <tbody>
                                             <?php $counter=0; ?>
-                                            @foreach ($memberList as $memberRow)
+                                            @foreach ($members as $memberRow)
                                             <?php $counter=$counter+1; ?>
                                             <tr>
                                                     <td><?php echo $counter ?></td>
-                                                    <td>{{ $memberRow->member_name }}</td>
-                                                    <td>{{ $memberRow->mobile_num }}</td>
-                                                    <td>{{ $memberRow->member_email_id }}</td>
-                                                    <td>{{ $memberRow->member_address }}</td>
+                                                    <td>{{ $memberRow->first_name }} {{$memberRow->last_name}}</td>
+                                                    <td>{{ $memberRow->mobile }}</td>
+                                                    <td>{{ $memberRow->email }}</td>
+                                                    <td>{{ $memberRow->address }}</td>
                                                     {{-- <td>
                                                         <button class="btn btn-warning edit-button"
                                                             data-id="{{ $memberRow->id }}"

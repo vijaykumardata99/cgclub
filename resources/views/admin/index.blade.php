@@ -57,7 +57,7 @@
                         
                         <div class="card-body">
                            <div class="d-flex align-items-center">
-                              <h5 class="mb-0 text-white">631</h5>
+                              <h5 class="mb-0 text-white">{{$membercount}}</h5>
                               <div class="ms-auto">
                                  <i class='bx bx-group fs-3 text-white'></i>
                               </div>
@@ -76,7 +76,7 @@
                      <div class="card radius-10 bg-gradient-orange">
                         <div class="card-body">
                            <div class="d-flex align-items-center">
-                              <h5 class="mb-0 text-white">40</h5>
+                              <h5 class="mb-0 text-white">{{$coachcount}}</h5>
                               <div class="ms-auto">
                                  <i class='bx bx-group fs-3 text-white'></i>
                               </div>
@@ -91,7 +91,7 @@
                         </div>
                      </div>
                   </div>
-                  <div class="col">
+                  <!-- <div class="col">
                      <div class="card radius-10 bg-gradient-ohhappiness">
                         <div class="card-body">
                            <div class="d-flex align-items-center">
@@ -128,7 +128,7 @@
                            </div>
                         </div>
                      </div>
-                  </div>
+                  </div> -->
                </div>
 				
             </div>
